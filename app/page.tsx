@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AlertDialog,
-  AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogTitle,
   AlertDialogDescription,
@@ -20,27 +19,25 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 
-const initialColors = [
-  { color: "blue", name: "azul", number: 1000 },
-  { color: "#ffffff", name: "blanco", number: 1000 },
-  { color: "#000000", name: "negro", number: 1000 },
-  { color: "gray", name: "gris", number: 1000 },
-  { color: "rgba(255, 255, 255, 0.1)", name: "trans", number: 1000 },
-  { color: "#dd0795", name: "fucsia", number: 1000 },
-  { color: "pink", name: "rosa", number: 1000 },
-  { color: "brown", name: "marron", number: 1000 },
-  { color: "green", name: "verde", number: 1000 },
-  { color: "#FFF52D", name: "amarillo", number: 1000 },
-  { color: "red", name: "rojo", number: 1000 },
-];
-
 export default function Home() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
-
-  // Controla qué alerta está abierta, o null para ninguna
   const [alertOpen, setAlertOpen] = useState<"X" | "Y" | null>(null);
+
+  async function fetchColorsFromBackend() {
+    try {
+      const response = await fetch("/api/colors");
+      const data = await response.json();
+      setColors(data);
+    } catch (error) {
+      console.error("Error al obtener los colores:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchColorsFromBackend();
+  }, []);
 
   function parseColor(color: string): [number, number, number] {
     if (color.startsWith("#")) {
@@ -87,7 +84,7 @@ export default function Home() {
       : "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]";
   }
 
-  function handleAccept() {
+  async function handleAccept() {
     if (selectedIndex === null) return;
 
     const restar = parseInt(inputValue);
@@ -97,14 +94,26 @@ export default function Home() {
     const nuevoValor = Math.max(current.number - restar, 1);
 
     const nuevosColores = [...colors];
-    nuevosColores[selectedIndex] = {
-      ...current,
-      number: nuevoValor,
-    };
-
+    nuevosColores[selectedIndex] = { ...current, number: nuevoValor };
     setColors(nuevosColores);
     setSelectedIndex(null);
     setInputValue("");
+
+    // POST al backend
+    try {
+      await fetch("/api/colors", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: current.name,
+          number: nuevoValor,
+        }),
+      });
+    } catch (err) {
+      console.error("Error al guardar en el backend", err);
+    }
   }
 
   return (
@@ -125,9 +134,7 @@ export default function Home() {
                     className={`relative aspect-square rounded-xl cursor-pointer flex flex-col items-center justify-center border-2 border-gray-300 ${textColor} hover:-translate-y-1 duration-500`}
                     style={{ backgroundColor: color }}
                   >
-                    {/* Botones pequeños en esquina superior derecha */}
                     <div className="absolute top-2 right-2 flex gap-0 z-10">
-                      {/* Botón X abre alerta X */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -137,8 +144,6 @@ export default function Home() {
                       >
                         X
                       </button>
-
-                      {/* Botón Y abre alerta Y */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -149,16 +154,12 @@ export default function Home() {
                         Y
                       </button>
                     </div>
-
                     <h3 className="text-lg font-semibold">{name}</h3>
                     <p className="text-base">{number}</p>
                   </li>
                 </DialogTrigger>
-
                 <DialogContent className="max-w-sm bg-zinc-900 text-white">
-                  <DialogTitle className="text-xl font-bold mb-4">
-                    {name}
-                  </DialogTitle>
+                  <DialogTitle className="text-xl font-bold mb-4">{name}</DialogTitle>
                   <Input
                     type="number"
                     placeholder="Cantidad a restar"
@@ -188,18 +189,22 @@ export default function Home() {
       >
         <AlertDialogContent className="bg-zinc-900 text-white">
           <AlertDialogTitle></AlertDialogTitle>
-          <AlertDialogDescription>Checkeado?</AlertDialogDescription>
+          <AlertDialogDescription>te confundiste?</AlertDialogDescription>
           <div className="flex mt-6 space-x-4">
             <AlertDialogCancel className="w-1/2 text-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200 text-black">
               Cancelar
             </AlertDialogCancel>
-            <AlertDialogAction
-              className="w-1/2 text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-              onClick={() => {
-                setAlertOpen(null);
-              }}
-            >
-              Ok
+
+            <AlertDialogAction asChild>
+              <button
+                className="w-1/2 text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                onClick={async () => {
+                  await fetchColorsFromBackend();
+                  setAlertOpen(null);
+                }}
+              >
+                Ok
+              </button>
             </AlertDialogAction>
           </div>
         </AlertDialogContent>
@@ -211,18 +216,14 @@ export default function Home() {
         onOpenChange={(open) => !open && setAlertOpen(null)}
       >
         <AlertDialogContent className="bg-zinc-900 text-white">
-          <AlertDialogDescription>
-            te confundiste putita?
-          </AlertDialogDescription>
+          <AlertDialogDescription>chekeado?</AlertDialogDescription>
           <div className="flex mt-6 space-x-4">
             <AlertDialogCancel className="w-1/2 text-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200 text-black">
               Cancelar
             </AlertDialogCancel>
             <AlertDialogAction
               className="w-1/2 text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-              onClick={() => {
-                setAlertOpen(null);
-              }}
+              onClick={() => setAlertOpen(null)}
             >
               Ok
             </AlertDialogAction>
@@ -232,3 +233,4 @@ export default function Home() {
     </>
   );
 }
+
