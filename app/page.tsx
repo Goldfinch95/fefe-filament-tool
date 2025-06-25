@@ -62,7 +62,9 @@ export default function Home() {
   /** Obtiene los colores de la base de datos, ordenados alfabéticamente */
   async function fetchColorsFromBackend() {
     try {
-      const { data, error } = await supabase.from<Color>("colores").select("*");
+      const { data, error } = await supabase
+  .from("colores")
+  .select("*") as { data: Color[] | null; error: any };
       if (error) throw error;
       if (data) {
         const coloresOrdenados = ordenarColoresAlfabeticamente(data);
