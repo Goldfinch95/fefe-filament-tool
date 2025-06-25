@@ -6,7 +6,7 @@ let colors = [
   { color: "#ffffff", name: "blanco", number: 1000 },
   { color: "#000000", name: "negro", number: 1000 },
   { color: "gray", name: "gris", number: 1000 },
-  { color: "rgba(255, 255, 255, 0.1)", name: "trans", number: 1000 },
+  { color: "#00ffffff", name: "trans", number: 1000 },
   { color: "#dd0795", name: "fucsia", number: 1000 },
   { color: "pink", name: "rosa", number: 1000 },
   { color: "brown", name: "marron", number: 1000 },

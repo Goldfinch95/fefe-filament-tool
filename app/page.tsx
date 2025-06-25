@@ -1,5 +1,6 @@
 "use client";
 
+import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import {
   AlertDialog,
@@ -27,11 +28,11 @@ export default function Home() {
 
   async function fetchColorsFromBackend() {
     try {
-      const response = await fetch("/api/colors");
-      const data = await response.json();
+      const { data, error } = await supabase.from("colores").select("*")
+      if (error) throw error;
       setColors(data);
     } catch (error) {
-      console.error("Error al obtener los colores:", error);
+      console.error("Error al obtener los colores desde Supabase:", error);
     }
   }
 
@@ -159,7 +160,9 @@ export default function Home() {
                   </li>
                 </DialogTrigger>
                 <DialogContent className="max-w-sm bg-zinc-900 text-white">
-                  <DialogTitle className="text-xl font-bold mb-4">{name}</DialogTitle>
+                  <DialogTitle className="text-xl font-bold mb-4">
+                    {name}
+                  </DialogTitle>
                   <Input
                     type="number"
                     placeholder="Cantidad a restar"
@@ -233,4 +236,3 @@ export default function Home() {
     </>
   );
 }
-
