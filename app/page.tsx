@@ -1,7 +1,7 @@
 "use client";
 
 import { supabase } from "@/lib/supabaseClient";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -19,7 +19,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 
-// Definimos el tipo Color según la estructura esperada
 type Color = {
   id: string;
   name: string;
@@ -28,15 +27,24 @@ type Color = {
 };
 
 export default function Home() {
-  // Estado tipado con Color[]
+  // Estado para almacenar la lista de colores desde la base de datos
   const [colors, setColors] = useState<Color[]>([]);
+  // Estado para controlar qué índice está seleccionado (para el diálogo)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [alertSelectedIndex, setAlertSelectedIndex] = useState<number | null>(null);
+  // Estado para controlar qué índice está seleccionado para la alerta "X"
+  const [alertSelectedIndex, setAlertSelectedIndex] = useState<number | null>(
+    null
+  );
+  // Estado para el valor del input (cantidad a restar)
   const [inputValue, setInputValue] = useState<string>("");
+  // Estado para controlar cuál alerta está abierta ("X", "Y" o ninguna)
   const [alertOpen, setAlertOpen] = useState<"X" | "Y" | null>(null);
-  const [previousValues, setPreviousValues] = useState<Record<string, number>>({});
+  // Estado para guardar los valores anteriores de "number" para permitir revertir cambios
+  const [previousValues, setPreviousValues] = useState<Record<string, number>>(
+    {}
+  );
 
-  /** 
+  /**
    * Función que hace la llamada POST a la API interna para actualizar un color
    * @param id - UUID del color a actualizar
    * @param number - Nuevo valor para el campo number
@@ -54,17 +62,17 @@ export default function Home() {
     }
   }
 
-  /** Ordena alfabéticamente los colores según su nombre */
+  /* Ordena alfabéticamente los colores. */
   function ordenarColoresAlfabeticamente(colores: Color[]): Color[] {
     return [...colores].sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  /** Obtiene los colores de la base de datos, ordenados alfabéticamente */
-  async function fetchColorsFromBackend() {
+  /**
+   * Función para obtener la lista de colores desde Supabase y actualizar el estado local
+   */
+  const fetchColorsFromBackend = useCallback(async () => {
     try {
-      const { data, error } = await supabase
-  .from("colores")
-  .select("*") as { data: Color[] | null; error: any };
+      const { data, error } = await supabase.from<"colores", Color>("colores").select("*");
       if (error) throw error;
       if (data) {
         const coloresOrdenados = ordenarColoresAlfabeticamente(data);
@@ -73,18 +81,27 @@ export default function Home() {
     } catch (error) {
       console.error("Error cargando colores:", error);
     }
-  }
-
-  useEffect(() => {
-    fetchColorsFromBackend();
   }, []);
 
+  // Al montar el componente, traemos los colores desde el backend
+  useEffect(() => {
+    fetchColorsFromBackend();
+  }, [fetchColorsFromBackend]);
+
+  /**
+   * Función para convertir un color hexadecimal o RGB string a un array RGB numérico
+   * @param color - Color en formato hexadecimal o rgb(a)
+   * @returns array con valores [r, g, b]
+   */
   function parseColor(color: string): [number, number, number] {
     if (color.startsWith("#")) {
       const hex = color.slice(1);
       const bigint = parseInt(
         hex.length === 3
-          ? hex.split("").map((c) => c + c).join("")
+          ? hex
+              .split("")
+              .map((c) => c + c)
+              .join("")
           : hex,
         16
       );
@@ -99,6 +116,11 @@ export default function Home() {
     return [rgb[0], rgb[1], rgb[2]];
   }
 
+  /**
+   * Determina si un color es claro o no para decidir color de texto adecuado
+   * @param color - Color en formato hexadecimal o rgb(a)
+   * @returns true si el color es claro, false si es oscuro
+   */
   function isColorLight(color: string): boolean {
     if (color === "transparent") return true;
     try {
@@ -110,6 +132,11 @@ export default function Home() {
     }
   }
 
+  /**
+   * Obtiene la clase CSS del color del texto según el color de fondo para mejor contraste
+   * @param color - Color de fondo
+   * @returns string con clases tailwind para el color de texto y sombra
+   */
   function getTextColor(color: string): string {
     const colorLower = color.toLowerCase();
     if (colorLower === "#ffff00" || colorLower === "yellow") {
@@ -120,6 +147,10 @@ export default function Home() {
       : "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]";
   }
 
+  /**
+   * Función que maneja la aceptación del input para restar un valor al número del color seleccionado
+   * Actualiza el estado local y también hace la llamada para actualizar el backend
+   */
   async function handleAccept() {
     if (selectedIndex === null) return;
 
@@ -129,14 +160,17 @@ export default function Home() {
     const current = colors[selectedIndex];
     const nuevoValor = Math.max(current.number - restar, 0);
 
+    // Guardamos el valor anterior para poder revertirlo si hace falta
     setPreviousValues((prev) => ({ ...prev, [current.id]: current.number }));
 
+    // Actualizamos el estado local con el nuevo valor
     const nuevosColores = [...colors];
     nuevosColores[selectedIndex] = { ...current, number: nuevoValor };
     setColors(nuevosColores);
 
     setInputValue("");
 
+    // Actualizamos el backend con el nuevo valor
     try {
       await updateColorInBackend(current.id, nuevoValor);
     } catch (error) {
@@ -244,12 +278,18 @@ export default function Home() {
                   }
 
                   try {
+                    // Actualiza el backend con el valor previo para revertir el cambio
                     await updateColorInBackend(colorActual.id, valorPrevio);
 
+                    // Actualiza el estado local con el valor previo
                     const copia = [...colors];
-                    copia[alertSelectedIndex] = { ...colorActual, number: valorPrevio };
+                    copia[alertSelectedIndex] = {
+                      ...colorActual,
+                      number: valorPrevio,
+                    };
                     setColors(copia);
 
+                    // Limpia el valor previo almacenado para ese color
                     setPreviousValues((prev) => {
                       const newPrev = { ...prev };
                       delete newPrev[colorActual.id];
@@ -274,12 +314,13 @@ export default function Home() {
       <AlertDialog
         open={alertOpen === "Y"}
         onOpenChange={(open) => {
-          if (!open) setAlertOpen(null);
+          if (!open) {
+            setAlertOpen(null);
+          }
         }}
       >
         <AlertDialogContent className="bg-zinc-900 text-white">
-          <AlertDialogTitle>¿Chequeado?</AlertDialogTitle>
-
+          <AlertDialogTitle>Chequeado?</AlertDialogTitle>
           <div className="flex mt-6 space-x-4">
             <AlertDialogCancel className="w-1/2 text-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200 text-black">
               No
@@ -296,15 +337,20 @@ export default function Home() {
                 try {
                   const colorActual = colors[alertSelectedIndex];
 
+                  // Actualiza backend a number=1000
                   await updateColorInBackend(colorActual.id, 1000);
 
+                  // Clona el array y actualiza el color seleccionado localmente
                   const nuevaLista = [...colors];
                   nuevaLista[alertSelectedIndex] = {
                     ...nuevaLista[alertSelectedIndex],
                     number: 1000,
                   };
 
+                  // Actualiza el estado con la nueva lista
                   setColors(nuevaLista);
+
+                  // Resetea selección y cierra alerta
                   setAlertSelectedIndex(null);
                   setAlertOpen(null);
                 } catch (error) {
