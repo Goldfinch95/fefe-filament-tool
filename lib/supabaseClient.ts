@@ -1,15 +1,9 @@
-// lib/supabaseClient.ts
-
 import { createClient } from '@supabase/supabase-js'
 
-// Las claves vienen desde las variables de entorno 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
-}
+if (!supabaseUrl) throw new Error("❌ supabaseUrl is required")
+if (!supabaseAnonKey) throw new Error("❌ supabaseKey is required")
 
-// Creamos el cliente de Supabase y lo exportamos
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
