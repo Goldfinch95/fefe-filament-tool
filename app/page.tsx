@@ -28,7 +28,7 @@ export default function Home() {
 
   async function fetchColorsFromBackend() {
     try {
-      const { data, error } = await supabase.from("colores").select("*")
+      const { data, error } = await supabase.from("colores").select("*");
       if (error) throw error;
       setColors(data);
     } catch (error) {
