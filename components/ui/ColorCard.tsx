@@ -1,3 +1,4 @@
+import { ReactNode } from "react"; 
 import {
   Dialog,
   DialogTitle,
@@ -23,6 +24,7 @@ interface Props {
   inputValue: string;
   setInputValue: (value: string) => void;
   onAccept: () => void;
+  children?: ReactNode;
 }
 
 const ColorCard = ({
