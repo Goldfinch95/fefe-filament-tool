@@ -55,7 +55,7 @@ export const isColorLight = (color: string): boolean => {
 
     return brightness > 128;
   } catch (err) {
-    console.error("Color inválido en isColorLight:", color);
+    console.error("Color inválido en isColorLight:", err);
     return false;
   }
 };

@@ -3,7 +3,6 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogContent,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { getTextColor } from "@/lib/colorHelpers";
 import { Color } from "@/lib/types";
@@ -28,7 +27,6 @@ interface Props {
 
 const ColorCard = ({
   color,
-  index,
   isSelected,
   onSelect,
   onDeselect,
