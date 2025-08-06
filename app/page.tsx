@@ -24,8 +24,8 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-full h-screen flex items-center justify-center p-4">
-        <ul className="grid grid-cols-7 gap-6 w-50% ">
+      <main className="flex items-center justify-center p-4">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-7 gap-6 w-50%">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}

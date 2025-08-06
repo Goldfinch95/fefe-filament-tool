@@ -1,9 +1,9 @@
+import { ReactNode } from "react"; 
 import {
   Dialog,
   DialogTitle,
   DialogTrigger,
   DialogContent,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { getTextColor } from "@/lib/colorHelpers";
 import { Color } from "@/lib/types";
@@ -24,11 +24,11 @@ interface Props {
   inputValue: string;
   setInputValue: (value: string) => void;
   onAccept: () => void;
+  children?: ReactNode;
 }
 
 const ColorCard = ({
   color,
-  index,
   isSelected,
   onSelect,
   onDeselect,
