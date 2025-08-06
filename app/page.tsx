@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <main className="w-full h-screen flex items-center justify-center p-4">
-        <ul className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-6 w-full max-w-6xl">
+        <ul className="grid grid-cols-7 gap-6 w-50% ">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}
