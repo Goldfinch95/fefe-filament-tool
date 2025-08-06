@@ -15,12 +15,12 @@ import {
 const items = [
   {
     title: "Colores",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
     title: "Excel",
-    url: "#",
+    url: "/excel",
     icon: Inbox,
   },
   {
@@ -38,7 +38,7 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar className="dark text-white">
-      <SidebarContent className="text-white">
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
