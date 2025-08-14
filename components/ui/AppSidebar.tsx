@@ -72,15 +72,15 @@ const data = {
       items: [
         {
           title: "Balance",
-          url: "/balance#top",
+          url: "/balance#balance",
         },
         {
           title: "Gastos",
-          url: "/balance#mid",
+          url: "/balance#gastos",
         },
         {
           title: "Ventas",
-          url: "/balance#bottom",
+          url: "/balance#ventas",
         },
       ],
     },
@@ -91,7 +91,7 @@ const data = {
     },
     {
       title: "Pedidos",
-      url: "/orders",
+      url: "/pedidos",
       icon: FaClipboardListIcon,
     },
     
