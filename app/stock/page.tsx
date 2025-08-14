@@ -34,7 +34,7 @@ const data: StockColumns[] = [
   { id: "28", product: "Maceta acolchonada 120", stock: 0, amount: 13000, date: "2025-06-14", observation: "" },
   { id: "29", product: "Jarron moderno espiralado", stock: 1, amount: 3100, date: "2025-06-14", observation: "" },
   { id: "30", product: "Salchicha porta papel", stock: 0, amount: 16000, date: "2025-07-01", observation: "" },
-  { id: "31", product: "Corona led", stock: 1, amount: "18000", date: "2025-06-18", observation: "" },
+  { id: "31", product: "Corona led", stock: 1, amount: 18000, date: "2025-06-18", observation: "" },
   { id: "32", product: "Nespresso harry Potter", stock: 0, amount: 11000, date: "2025-06-18", observation: "" },
   { id: "33", product: "Maceta cucurucho", stock: 0, amount: 3400, date: "2025-06-23", observation: "" },
   { id: "34", product: "Maceta arrecife", stock: 1, amount: 9800, date: "2025-06-23", observation: "" },
