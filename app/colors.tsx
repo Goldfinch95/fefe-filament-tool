@@ -5,7 +5,7 @@ import ColorDialog from "@/components/ColorDialog";
 import AlertRevert from "@/components/ui/AlertRevert";
 import AlertReset from "@/components/ui/AlertReset";
 
-export default function Colors() {
+export default function ColorsPage() {
   const {
     colors,
     selectedIndex,
