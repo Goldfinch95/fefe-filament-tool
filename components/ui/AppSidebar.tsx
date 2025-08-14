@@ -67,16 +67,20 @@ const data = {
     },
     {
       title: "Balance",
-      url: "/phantom",
+      url: "/balance",
       icon: FaBalanceScaleIcon,
       items: [
         {
+          title: "Balance",
+          url: "/balance#top",
+        },
+        {
           title: "Gastos",
-          url: "/phantom",
+          url: "/balance#mid",
         },
         {
           title: "Ventas",
-          url: "/phantom",
+          url: "/balance#bottom",
         },
       ],
     },
