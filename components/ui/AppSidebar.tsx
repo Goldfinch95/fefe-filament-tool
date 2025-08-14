@@ -105,7 +105,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                    <Image width={24} height={24} className="size-6 " src="/fefe.jfif" alt="Fefe3d Printing" />
+                    <Image width={24} height={24} className="size-6 " src="/fefe.webp" alt="Fefe3d Printing" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Fefe3d Printing</span>
