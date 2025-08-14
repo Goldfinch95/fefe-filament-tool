@@ -39,7 +39,7 @@ const data = {
   user: {
     name: "fefe",
     email: "m@example.com",
-    avatar: "/fefe.jfif",
+    avatar: "/fefe.webp",
   },
   teams: [
     {
