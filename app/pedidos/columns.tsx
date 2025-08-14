@@ -23,24 +23,30 @@ export const columns: ColumnDef<pedidosColumns>[] = [
   },
   {
     accessorKey: "stock",
-    header: "Cantidad",
+    header: () => <div className=" text-center w-full">Cantidad</div>,
+    cell: ({ getValue }) => (
+      <div className="text-center">{String(getValue())}</div>
+    ),
   },
   {
     accessorKey: "color",
-    header: () => <div className="pr-20 text-center w-full">Color</div>,
+    header: () => <div className=" text-center w-full">Color</div>,
     cell: ({ getValue }) => (
-      <div className="pr-20 text-center">{String(getValue())}</div>
+      <div className="text-center">{String(getValue())}</div>
     ),
   },
   {
     accessorKey: "client",
-    header: "Cliente",
+    header: () => <div className=" text-center w-full">Cliente</div>,
     cell: ({ getValue }) => (
-      <div className="">{String(getValue())}</div>
+      <div className="text-center">{String(getValue())}</div>
     ),
   },
   {
     accessorKey: "observation",
-    header: "Observación",
+    header: () => <div className="  w-full">Observación</div>,
+    cell: ({ getValue }) => (
+      <div className="">{String(getValue())}</div>
+    ),
   },
 ]

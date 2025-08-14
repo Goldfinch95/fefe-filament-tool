@@ -14,7 +14,7 @@ const data: pedidosColumns[] = [
 export default function pedidosPage() {
   return (
     <div>
-      <div className="min-h-screen bg-[url('/fefe.jfif')] bg-cover bg-center w-full  flex flex-1 flex-col gap-4 p-4 pt-0">
+      <div className="dark min-h-screen bg-[url('/fefe.jfif')] bg-cover bg-center w-full  flex flex-1 flex-col gap-4 p-4 pt-0">
       <DataTable columns={columns} data={data} />
       </div>
     </div>
