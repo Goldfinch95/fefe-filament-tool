@@ -52,11 +52,11 @@ const ColorCard = ({
           style={{ backgroundColor: color.color }}
         >
           <div className="absolute top-2 left-2 z-10">
-            <AlertButton icon ={faBackward} onClick={onAlertX} />
+            <AlertButton icon={faBackward as any} onClick={onAlertX} />
           </div>
 
           <div className="absolute top-2 right-2 z-10">
-            <AlertButton icon={faRotate} onClick={onAlertY} />
+            <AlertButton icon={faRotate as any} onClick={onAlertY} />
           </div>
           <h3 className="text-2xl font-semibold mt-4 text-center drop-shadow-sm">{color.name}</h3>
           <p className="text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
