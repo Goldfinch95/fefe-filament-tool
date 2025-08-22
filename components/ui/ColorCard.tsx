@@ -11,6 +11,7 @@ import AlertButton from "./AlertButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { faBackward, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 interface Props {
@@ -52,11 +53,11 @@ const ColorCard = ({
           style={{ backgroundColor: color.color }}
         >
           <div className="absolute top-2 left-2 z-10">
-            <AlertButton icon={faBackward as any} onClick={onAlertX} />
+            <AlertButton icon={<FontAwesomeIcon icon={faBackward} size="lg" />} onClick={onAlertX} />
           </div>
 
           <div className="absolute top-2 right-2 z-10">
-            <AlertButton icon={faRotate as any} onClick={onAlertY} />
+            <AlertButton icon={<FontAwesomeIcon icon={faRotate} size="lg" />} onClick={onAlertY} />
           </div>
           <h3 className="text-2xl font-semibold mt-4 text-center drop-shadow-sm">{color.name}</h3>
           <p className="text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>

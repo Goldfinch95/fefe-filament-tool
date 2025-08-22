@@ -1,9 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { ReactNode, isValidElement } from 'react';
+import { ReactNode } from 'react';
 
 interface Props {
-  icon: IconDefinition | ReactNode;
+  icon: ReactNode;
   onClick: () => void;
 }
 
@@ -16,9 +14,7 @@ const AlertButton = ({ icon, onClick }: Props) => {
         onClick();
       }}
     >
-      {isValidElement(icon)
-        ? icon
-        : <FontAwesomeIcon icon={icon as IconDefinition} size="lg" />}
+      {icon}
     </button>
   );
 }
