@@ -5,15 +5,14 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar"
-
 import Link from "next/link";
+import Image from "next/image";
 
 import { useSidebar } from "@/components/ui/sidebar"
 
@@ -42,7 +41,7 @@ const items = [
     icon: List,
   },
 ]
-
+ 
 export function AppSidebar() {
   const { isMobile } = useSidebar();
 
@@ -70,10 +69,12 @@ export function AppSidebar() {
   return (
     <Sidebar className="dark" collapsible="none" >
       <SidebarHeader>
-        <img
+        <Image
           src="/fefe.webp"
           alt="Logo"
           className="size-8 rounded-full mx-auto mb-2"
+          width={32}
+          height={32}
         />
       </SidebarHeader>
       <SidebarContent>
