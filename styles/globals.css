@@ -124,10 +124,35 @@
 
 
 @layer utilities {
-  .grid-cols-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+  .background_img {
+  background-image: url('/fefe.webp');
+  background-size:contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  
 }
 
+.grid-costum{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 2rem;
+  place-items: center;
+  
+}
+
+@media (max-width: 640px) {
+  .grid-costum {
+    display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+   grid-template-rows: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 2; /* Opcional, si querés sin espacio */
+    
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    width: 100vw;  /* Ocupa todo el ancho de la pantalla */
+  }
+}
+}
 
 

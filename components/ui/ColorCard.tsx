@@ -49,23 +49,29 @@ const ColorCard = ({
       <DialogTrigger asChild>
         <li
           onClick={onSelect}
-          className={`relative aspect-square rounded-xl cursor-pointer flex flex-col items-center justify-center border-2 border-gray-300 ${textColor} hover:-translate-y-1 duration-500`}
+          className={` relative 
+    size-20 sm:size-48 
+    aspect-square 
+    rounded-xl cursor-pointer 
+    flex flex-col items-center justify-center 
+    border-2 border-gray-300 ${textColor} 
+    hover:-translate-y-1 duration-500`}
           style={{ backgroundColor: color.color }}
         >
-          <div className="absolute top-2 left-2 z-10">
-            <AlertButton icon={<FontAwesomeIcon icon={faBackward} size="lg" />} onClick={onAlertX} />
+          <div className="absolute top-1 left-1 sm:top-2 sm:left-2 z-10">
+            <AlertButton icon={<FontAwesomeIcon icon={faBackward} />} onClick={onAlertX} />
           </div>
 
-          <div className="absolute top-2 right-2 z-10">
-            <AlertButton icon={<FontAwesomeIcon icon={faRotate} size="lg" />} onClick={onAlertY} />
+          <div className="absolute top-1 right-1 sm:top-2 sm:right-2 z-10">
+            <AlertButton icon={<FontAwesomeIcon icon={faRotate}  />} onClick={onAlertY} />
           </div>
-          <h3 className="text-2xl font-semibold mt-4 text-center drop-shadow-sm">{color.name}</h3>
-          <p className="text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
+          <h3 className="text-[0.625rem] sm:text-2xl font-semibold mt-4 text-center drop-shadow-sm">{color.name}</h3>
+          <p className="text-xs sm:text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
         </li>
       </DialogTrigger>
 
       <DialogContent className="max-w-sm bg-zinc-900 text-white">
-        <DialogTitle className="text-3xl font-bold mb-6 text-center">
+        <DialogTitle className="text-[0.5px] sm:text-2xl font-semibold mt-1 sm:mt-4 text-center drop-shadow-sm">
           {color.name}
         </DialogTitle>
 

@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={` antialiased`}>
         <SidebarProvider className="h-screen">
           <AppSidebar />
-      <main>
+      <main className="background_img bg-[#10110e] w-full">
         {children}
       </main>
     </SidebarProvider>

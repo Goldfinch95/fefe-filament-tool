@@ -25,8 +25,8 @@ export default function ColorsPage() {
  
     return (
     <>
-  <main className="flex min-h-screen w-screen bg-[url('/fefe.jfif')] bg-center bg-[#11110f] bg-no-repeat items-center justify-center p-4">
-        <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-7 gap-6 w-50%">
+  <main className="w-full h-screen">
+        <ul className="grid w-full h-screen gap-8 p-8 overflow-auto grid-costum ">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}
