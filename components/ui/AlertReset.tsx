@@ -9,6 +9,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Color } from "@/lib/types";
 import { updateColorInBackend } from "@/services/colors";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+})
 
 interface Props {
   open: boolean;
@@ -48,14 +54,14 @@ const AlertReset = ({
 
   return (
     <AlertDialog open={open} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent className="bg-zinc-900 text-white">
-        <AlertDialogTitle className="text-3xl font-bold mb-6 text-center">Chequeado?</AlertDialogTitle>
-        <div className="flex mt-6 space-x-4">
-          <AlertDialogCancel className="w-1/2 text-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200 text-black">
+      <AlertDialogContent className="bg-zinc-900 text-white sm:h-1/6">
+        <AlertDialogTitle className={`text-4xl text-center ${poppins.className}`}>Chequeado?</AlertDialogTitle>
+        <div className="flex gap-2">
+          <AlertDialogCancel className={`w-1/2 text-lg text-center rounded-md border border-gray-300 hover:bg-gray-200 text-black ${poppins.className}`}>
             No
           </AlertDialogCancel>
           <AlertDialogAction
-            className="w-1/2 text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            className={`w-1/2 text-lg text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 ${poppins.className}`}
             onClick={handleReset}
           >
             Sí

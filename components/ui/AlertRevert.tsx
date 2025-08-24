@@ -9,6 +9,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Color } from "@/lib/types";
 import { updateColorInBackend } from "@/services/colors";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+})
 
 interface Props {
   open: boolean;
@@ -66,18 +72,18 @@ const AlertRevert = ({
 
   return (
     <AlertDialog open={open} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent className="max-w-sm bg-zinc-900 text-white">
-        <AlertDialogTitle className="text-3xl font-bold mb-6 text-center">
+      <AlertDialogContent className=" bg-zinc-900 text-white sm:h-1/6">
+        <AlertDialogTitle className={`text-4xl text-center ${poppins.className}`}>
           ¿Te confundiste?
         </AlertDialogTitle>
-        <div className="flex mt-6 space-x-4">
-          <AlertDialogCancel className="w-1/2 text-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200 text-black">
+        <div className="flex gap-2">
+          <AlertDialogCancel className={`w-1/2 text-lg text-center rounded-md border border-gray-300 hover:bg-gray-200 text-black ${poppins.className}`}>
             No
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleConfirm}
             disabled={!puedeRevertir}
-            className={`w-1/2 text-center rounded-md px-4 py-2 ${
+            className={`w-1/2  text-lg text-center rounded-md ${poppins.className} ${
               puedeRevertir
                 ? "bg-blue-600 text-white hover:bg-blue-700"
                 : "bg-gray-400 text-white cursor-not-allowed"

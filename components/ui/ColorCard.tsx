@@ -12,7 +12,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { faBackward, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Poppins, Varela_Round } from 'next/font/google';
 
+
+const varela = Varela_Round({
+  subsets: ['latin'],
+  weight: ['400'],
+})
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+})
 
 interface Props {
   color: Color;
@@ -65,13 +76,13 @@ const ColorCard = ({
           <div className="absolute top-1 right-1 sm:top-2 sm:right-2 z-10">
             <AlertButton icon={<FontAwesomeIcon icon={faRotate}  />} onClick={onAlertY} />
           </div>
-          <h3 className="text-[0.625rem] sm:text-2xl font-semibold mt-4 text-center drop-shadow-sm">{color.name}</h3>
+          <h3 className={`text-[0.500rem] sm:text-lg font-semibold mt-4 text-center drop-shadow-sm ${varela.className}`}>{color.name}</h3>
           <p className="text-xs sm:text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
         </li>
       </DialogTrigger>
 
-      <DialogContent className="max-w-sm bg-zinc-900 text-white">
-        <DialogTitle className="text-[0.5px] sm:text-2xl font-semibold mt-1 sm:mt-4 text-center drop-shadow-sm">
+      <DialogContent className="w-fill  bg-zinc-900 text-white">
+        <DialogTitle className={`text-3xl sm:text-4xl mt-1  text-center  ${poppins.className}`}>
           {color.name}
         </DialogTitle>
 
@@ -90,15 +101,15 @@ const ColorCard = ({
             placeholder="Cantidad a restar"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className="text-lg h-12 p-4 bg-zinc-800 text-white placeholder-gray-400 
+            className={`  h-12 p-4 bg-zinc-800 text-white placeholder-gray-400 
              [&::-webkit-inner-spin-button]:appearance-none 
              [&::-webkit-outer-spin-button]:appearance-none 
-             [&appearance:textfield]"
+             [&appearance:textfield] ${poppins.className}`}
           />
 
           <Button
             type="submit"
-            className="w-full h-12 text-lg my-2 bg-blue-600 hover:bg-blue-700 text-white"
+            className={`text-base sm:text-2xl w-full h-12 my-2 bg-blue-600 hover:bg-blue-700 text-white ${poppins.className}`}
             disabled={isNaN(Number(inputValue)) || Number(inputValue) <= 0}
           >
             Aceptar
