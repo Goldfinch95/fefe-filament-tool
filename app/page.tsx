@@ -22,11 +22,12 @@ export default function ColorsPage() {
     setColors,
   } = useColors();
 
- 
+  /*modifica el gap del ul para que entre mas colores*/
     return (
     <>
+    
   <main className="w-full h-screen">
-        <ul className="grid w-full h-screen gap-8 p-8 overflow-auto grid-costum">
+        <ul className="overflow-auto grid-costum pt-18 sm:pt-0 gap-15">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}

@@ -115,6 +115,7 @@
     @apply border-border outline-ring/50;
   }
   body {
+    
     @apply bg-background text-foreground;
   }
 }
@@ -126,10 +127,11 @@
 @layer utilities {
   .background_img {
   background-image: url('/fefe.webp');
-  background-size:contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
+    background-size: contain; /* o cover si querés que llene */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    
   
 }
 
@@ -137,7 +139,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 2rem;
+  
   place-items: center;
   
 }
