@@ -61,7 +61,7 @@ const ColorCard = ({
         <li
           onClick={onSelect}
           className={` relative 
-    size-20 sm:size-48 
+    size-26 sm:size-48 
     aspect-square 
     rounded-xl cursor-pointer 
     flex flex-col items-center justify-center 
@@ -76,7 +76,7 @@ const ColorCard = ({
           <div className="absolute top-1 right-1 sm:top-2 sm:right-2 z-10">
             <AlertButton icon={<FontAwesomeIcon icon={faRotate}  />} onClick={onAlertY} />
           </div>
-          <h3 className={`text-[0.500rem] sm:text-lg font-semibold mt-4 text-center drop-shadow-sm ${varela.className}`}>{color.name}</h3>
+          <h3 className={`text-xs sm:text-lg font-semibold mt-4 text-center drop-shadow-sm ${varela.className}`}>{color.name}</h3>
           <p className="text-xs sm:text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
         </li>
       </DialogTrigger>

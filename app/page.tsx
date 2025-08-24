@@ -27,7 +27,7 @@ export default function ColorsPage() {
     <>
     
   <main className="w-full h-screen">
-        <ul className="overflow-auto grid-costum pt-18 sm:pt-0 gap-15">
+        <ul className="overflow-auto grid-costum pt-18 sm:pt-0 gap-10 sm:gap-15">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}
