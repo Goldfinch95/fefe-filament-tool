@@ -70,11 +70,11 @@ const ColorCard = ({
           style={{ backgroundColor: color.color }}
         >
           <div className="absolute top-1 left-1 sm:top-2 sm:left-2 z-10">
-            <AlertButton icon={<FontAwesomeIcon icon={faBackward} />} onClick={onAlertX} />
+            <AlertButton icon={<FontAwesomeIcon icon={faBackward}  className="text-sm sm:text-xl"  />} onClick={onAlertX} />
           </div>
 
           <div className="absolute top-1 right-1 sm:top-2 sm:right-2 z-10">
-            <AlertButton icon={<FontAwesomeIcon icon={faRotate}  />} onClick={onAlertY} />
+            <AlertButton icon={<FontAwesomeIcon icon={faRotate} className="text-sm sm:text-xl" />} onClick={onAlertY} />
           </div>
           <h3 className={`text-xs sm:text-lg font-semibold mt-4 text-center drop-shadow-sm ${varela.className}`}>{color.name}</h3>
           <p className="text-xs sm:text-2xl font-normal text-center drop-shadow-sm">{color.number}</p>
