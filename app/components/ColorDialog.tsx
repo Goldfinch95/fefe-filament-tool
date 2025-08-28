@@ -1,6 +1,6 @@
-import { DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { DialogContent, DialogTitle, DialogClose } from "@/common/components/ui/dialog";
+import { Input } from "@/common/components/ui/input";
+import { Button } from "@/common/components/ui/button";
 
 interface Props {
   name: string;

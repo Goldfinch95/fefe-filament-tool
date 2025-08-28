@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import {
   fetchColorsFromBackend,
   updateColorInBackend,
-} from "@/services/colors";
-import { Color } from "@/lib/types";
+} from "@/infrastructure/services/colors";
+import { Color } from "@/interfaces/types";
 
 export function useColors() {
   /*Estados*/

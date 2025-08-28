@@ -1,9 +1,9 @@
 "use client";
-import { useColors } from "@/hooks/useColors";
-import ColorCard from "@/components/ui/ColorCard";
-import ColorDialog from "@/components/ColorDialog";
-import AlertRevert from "@/components/ui/AlertRevert";
-import AlertReset from "@/components/ui/AlertReset";
+import { useColors } from "@/common/hooks/useColors";
+import ColorCard from "@/app/components/ColorCard";
+import ColorDialog from "@/app/components/ColorDialog";
+import AlertRevert from "@/app/components/AlertRevert";
+import AlertReset from "@/app/components/AlertReset";
 
 export default function ColorsPage() {
   const {
@@ -27,7 +27,7 @@ export default function ColorsPage() {
     <>
     
   <main className="w-full h-screen">
-        <ul className="overflow-auto grid-costum pt-18 sm:pt-0 gap-10 sm:gap-14">
+        <ul className="overflow-auto grid-costum pt-18 sm:pt-0 gap-10 sm:gap-10">
           {colors.map((color, index) => (
             <ColorCard
               key={color.id}
