@@ -1,4 +1,4 @@
-import { Color } from "@/lib/types";
+import { Color } from "@/interfaces/types";
 
 export const sortColorsAlphabetically = (colores: Color[]): Color[] =>
   [...colores].sort((a, b) => a.name.localeCompare(b.name));

@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 
 import {
   SidebarProvider,
-} from "@/components/ui/sidebar";
+} from "@/common/components/ui/sidebar";
 
-import { AppSidebar } from "@/components/AppSidebar";
+import { AppSidebar } from "@/app/layout/AppSidebar";
 
 
 export const metadata: Metadata = {

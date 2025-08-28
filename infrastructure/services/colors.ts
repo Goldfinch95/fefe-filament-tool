@@ -1,6 +1,6 @@
-import { supabase } from "@/lib/supabaseClient";
-import { Color } from "@/lib/types";
-import { sortColorsAlphabetically } from "@/lib/sort";
+import { supabase } from "@/infrastructure/db/supabaseClient";
+import { Color } from "@/interfaces/types";
+import { sortColorsAlphabetically } from "@/common/utils/sort";
 
 /* Actualiza un color en el backend mediante la API interna
  */

@@ -6,9 +6,9 @@ import {
   AlertDialogTitle,
   AlertDialogAction,
   AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
-import { Color } from "@/lib/types";
-import { updateColorInBackend } from "@/services/colors";
+} from "@/common/components/ui/alert-dialog";
+import { Color } from "@/interfaces/types";
+import { updateColorInBackend } from "@/infrastructure/services/colors";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
