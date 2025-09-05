@@ -17,14 +17,14 @@ import Image from "next/image";
 
 
 
-import { Boxes, List, Paintbrush, Scale, } from "lucide-react";
+import { Package, ClipboardList, Palette, Scale, } from "lucide-react";
 
 // Menu items.
 const items = [
   {
     title: "Colores",
     url: "/",
-    icon: Paintbrush,
+    icon: Palette,
   },
   {
     title: "Balance",
@@ -34,12 +34,12 @@ const items = [
   {
     title: "Stock",
     url: "/stock",
-    icon: Boxes,
+    icon: Package,
   },
   {
     title: "Pedidos",
     url: "/pedidos",
-    icon: List,
+    icon: ClipboardList,
   },
 ]
  
