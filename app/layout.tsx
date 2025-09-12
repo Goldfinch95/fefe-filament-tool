@@ -24,10 +24,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/fefe.webp" type="image/webp" />
       </head>
-      <body className={` antialiased`}>
-        <SidebarProvider className="h-screen">
+      <body className={` antialiased min-h-screen flex`}>
+        <SidebarProvider>
           <AppSidebar />
-      <main className="background_img bg-[#10110e] w-full">
+      <main className="background_img bg-[#10110e] min-h-s w-full">
         {children}
       </main>
     </SidebarProvider>
