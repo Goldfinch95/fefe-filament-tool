@@ -134,7 +134,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     id: "select",
-    header: ({ table }) => (
+    header: ({  }) => (
       <div className="flex items-center justify-center">
         
       </div>
