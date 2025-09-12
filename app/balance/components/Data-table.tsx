@@ -21,10 +21,6 @@ import {
 import { CSS } from "@dnd-kit/utilities"
 import {
   ChevronDown as IconChevronDown,
-  ChevronLeft as IconChevronLeft,
-  ChevronRight as IconChevronRight,
-  ChevronsLeft as IconChevronsLeft,
-  ChevronsRight as IconChevronsRight,
   CircleCheck as IconCircleCheckFilled,
   EllipsisVertical as IconDotsVertical,
   GripVertical as IconGripVertical,
@@ -77,7 +73,6 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/common/components/ui/dropdown-menu"
 import { Input } from "@/common/components/ui/input"
