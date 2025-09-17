@@ -57,7 +57,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/common/components/ui/chart"
-import { Checkbox } from "@/common/components/ui/checkbox"
+
 import {
   Drawer,
   DrawerClose,
@@ -117,6 +117,33 @@ export const schema = z.object({
   target: z.string(),
   limit: z.string(), */}
 // Create a separate component for the drag handle
+
+function StatusCell({ initialStatus }: { initialStatus: string }) {
+  const [status, setStatus] = React.useState(initialStatus);
+
+  const handleToggle = () => {
+    setStatus((prev) => (prev === "Pagado" ? "Debe" : "Pagado"));
+  };
+
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      className="flex items-center gap-2 px-2 no-hover"
+      onClick={handleToggle}
+    >
+      <Badge variant="outline" className="text-muted-foreground px-1.5">
+        {status === "Pagado" ? (
+          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        ) : (
+          <IconLoader />
+        )}
+        {status}
+      </Badge>
+    </Button>
+  );
+}
+
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
     id,
@@ -163,31 +190,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
   accessorKey: "status",
   header: "Status",
-  cell: ({ row }) => {
-    const [status, setStatus] = React.useState(row.original.status);
-
-    const handleToggle = () => {
-      setStatus((prev) => prev === "Pagado" ? "Debe" : "Pagado");
-    };
-
-    return (
-      <Button
-        variant="ghost"
-        size="sm"
-        className="flex items-center gap-2 px-2"
-        onClick={handleToggle}
-      >
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {status === "Pagado" ? (
-            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-          ) : (
-            <IconLoader />
-          )}
-          {status}
-        </Badge>
-      </Button>
-    );
-  },
+  cell: ({ row }) => <StatusCell initialStatus={row.original.status} />,
 },
   {
   accessorKey: "client",
