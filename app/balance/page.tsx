@@ -4,7 +4,7 @@ import dataJson from "./data.json"
 import { SellData } from "@/interfaces/types";
 
 const data = dataJson as unknown as SellData[];
-const totalSells = (data as any[]).reduce((acc, item) => acc + item.amount, 0);
+const totalSells = data.reduce((acc, item) => acc + item.amount, 0);
 const totalObjects = data.reduce((acc, item) => acc + item.number, 0);
 
 export default function BalancePage() {
