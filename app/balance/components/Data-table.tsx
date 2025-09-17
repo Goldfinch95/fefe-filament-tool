@@ -99,6 +99,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/common/components/ui/tabs"
+
+
 export const schema = z.object({
   id: z.number(),
   product: z.string(),
@@ -109,11 +111,11 @@ export const schema = z.object({
   amount: z.string(),
   observations: z.string(),
   seller: z.string(),
-  type: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  
 })
+
+{/*type: z.string(),
+  target: z.string(),
+  limit: z.string(), */}
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
@@ -531,7 +533,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           {item.product}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="dark text-white">
         <DrawerHeader className="gap-1">
           <DrawerTitle>{item.product}</DrawerTitle>
           <DrawerDescription>
@@ -596,7 +598,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator />
             </>
           )}
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4 ">
             <div className="flex flex-col gap-3">
               <Label htmlFor="header">Header</Label>
               <Input id="header" defaultValue={item.product} />
@@ -604,7 +606,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <Label htmlFor="type">Type</Label>
-                <Select defaultValue={item.type}>
+                {/*<Select defaultValue={item.type}>
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
@@ -626,7 +628,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                     <SelectItem value="Narrative">Narrative</SelectItem>
                     <SelectItem value="Cover Page">Cover Page</SelectItem>
                   </SelectContent>
-                </Select>
+                </Select>*/}
               </div>
               <div className="flex flex-col gap-3">
                 <Label htmlFor="status">Status</Label>
@@ -644,12 +646,12 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="target">Target</Label>
-                <Input id="target" defaultValue={item.target} />
+                {/*<Label htmlFor="target">Target</Label>
+                <Input id="target" defaultValue={item.target} />*/}
               </div>
               <div className="flex flex-col gap-3">
-                <Label htmlFor="limit">Limit</Label>
-                <Input id="limit" defaultValue={item.limit} />
+                {/*<Label htmlFor="limit">Limit</Label>
+                <Input id="limit" defaultValue={item.limit} />*/}
               </div>
             </div>
             <div className="flex flex-col gap-3">
