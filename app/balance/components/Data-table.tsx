@@ -147,15 +147,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         
       </div>
     ),
-    cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      </div>
-    ),
+    
     enableSorting: false,
     enableHiding: false,
   },
@@ -169,19 +161,34 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Pagado" ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.status}
-      </Badge>
-    ),
+  accessorKey: "status",
+  header: "Status",
+  cell: ({ row }) => {
+    const [status, setStatus] = React.useState(row.original.status);
+
+    const handleToggle = () => {
+      setStatus((prev) => prev === "Pagado" ? "Debe" : "Pagado");
+    };
+
+    return (
+      <Button
+        variant="ghost"
+        size="sm"
+        className="flex items-center gap-2 px-2"
+        onClick={handleToggle}
+      >
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {status === "Pagado" ? (
+            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+          ) : (
+            <IconLoader />
+          )}
+          {status}
+        </Badge>
+      </Button>
+    );
   },
+},
   {
   accessorKey: "client",
   header: "Cliente",
@@ -444,7 +451,7 @@ export function DataTable({
             id={sortableId}
           >
             <Table>
-              <TableHeader className="bg-muted sticky top-0 z-10">
+              <TableHeader className="bg-muted sticky top-0 z-10 [&_*]:hover:bg-transparent">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {

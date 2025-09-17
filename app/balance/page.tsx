@@ -16,7 +16,9 @@ export default function BalancePage() {
       <div>
         <DataTable  data={data}/>
       </div>
-      {/*<div id="gastos" className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />*/}
+      <div className="pt-10">
+        <DataTable  data={data}/>
+      </div>
     </div>
   );
 }
