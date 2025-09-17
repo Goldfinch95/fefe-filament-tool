@@ -35,7 +35,7 @@ const DATA = [
 
 export function SectionCards() {
   return (
-    <div className="grid py-2 auto-rows-min gap-4 md:grid-cols-3 ">
+    <div className="grid pt-2 py-5 auto-rows-min gap-4  px-4 lg:px-6 md:grid-cols-3 ">
         {DATA.map((item,i) => (
         <Card key={i} className="@container/card dark">
         <CardHeader>

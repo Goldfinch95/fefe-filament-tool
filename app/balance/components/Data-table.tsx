@@ -101,12 +101,18 @@ import {
 } from "@/common/components/ui/tabs"
 export const schema = z.object({
   id: z.number(),
-  header: z.string(),
-  type: z.string(),
+  product: z.string(),
   status: z.string(),
+  client: z.string(),
+  date: z.string(),
+  number: z.string(),
+  amount: z.string(),
+  observations: z.string(),
+  seller: z.string(),
+  type: z.string(),
   target: z.string(),
   limit: z.string(),
-  reviewer: z.string(),
+  
 })
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -153,10 +159,10 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   
   {
-    accessorKey: "Producto",
+    accessorKey: "product",
     header: "Producto",
     cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />
+      return <TableCellViewer item={row.original} />;
     },
     enableHiding: false,
   },
@@ -165,7 +171,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     header: "Status",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
+        {row.original.status === "Pagado" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
           <IconLoader />
@@ -175,48 +181,48 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     ),
   },
   {
-  accessorKey: "Cliente",
+  accessorKey: "client",
   header: "Cliente",
   cell: ({ row }) => (
-    <span>{row.original.reviewer}</span>
+    <span>{row.original.client}</span>
   ),
 },
 {
-  accessorKey: "Fecha",
+  accessorKey: "date",
   header: "Fecha",
   cell: ({ row }) => (
-    <span>{row.original.reviewer}</span>
+    <span>{row.original.date}</span>
   ),
 },
 {
-  accessorKey: "Cantidad",
+  accessorKey: "number",
   header: "Cantidad",
   cell: ({ row }) => (
-    <span>{row.original.reviewer}</span>
+    <span>{row.original.number}</span>
   ),
 },
 {
-  accessorKey: "Monto",
+  accessorKey: "amount",
   header: "Monto",
   cell: ({ row }) => (
-    <span>{row.original.reviewer}</span>
+    <span>{row.original.amount}</span>
   ),
 },
 {
-  accessorKey: "Observación",
+  accessorKey: "observations",
   header: "Observación",
   cell: ({ row }) => (
-    <span>{row.original.reviewer}</span>
+    <span>{row.original.observations}</span>
   ),
 },
 {
-    accessorKey: "Vendedor",
+    accessorKey: "seller",
     header: "Vendedor",
     cell: ({ row }) => {
-      const isAssigned = row.original.reviewer !== "Assign reviewer"
+      const isAssigned = row.original.seller !== "Vendedor"
 
       if (isAssigned) {
-        return row.original.reviewer
+        return row.original.seller
       }
 
       return (
@@ -230,12 +236,12 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
               size="sm"
               id={`${row.original.id}-reviewer`}
             >
-              <SelectValue placeholder="Assign reviewer" />
+            <SelectValue placeholder="¿Vendedor?" />
             </SelectTrigger>
             <SelectContent align="end">
-              <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
-              <SelectItem value="Jamik Tashpulatov">
-                Jamik Tashpulatov
+              <SelectItem value="Fede">Fede</SelectItem>
+              <SelectItem value="Fer">
+                Fer
               </SelectItem>
             </SelectContent>
           </Select>
@@ -243,10 +249,6 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
       )
     },
   },
-  
-  
-  
-  
   {
     id: "actions",
     cell: () => (
@@ -526,12 +528,12 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
     <Drawer direction={isMobile ? "bottom" : "right"}>
       <DrawerTrigger asChild>
         <Button variant="link" className="text-foreground w-fit px-0 text-left">
-          {item.header}
+          {item.product}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{item.header}</DrawerTitle>
+          <DrawerTitle>{item.product}</DrawerTitle>
           <DrawerDescription>
             Showing total visitors for the last 6 months
           </DrawerDescription>
@@ -597,7 +599,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
               <Label htmlFor="header">Header</Label>
-              <Input id="header" defaultValue={item.header} />
+              <Input id="header" defaultValue={item.product} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
@@ -652,7 +654,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             </div>
             <div className="flex flex-col gap-3">
               <Label htmlFor="reviewer">Reviewer</Label>
-              <Select defaultValue={item.reviewer}>
+              <Select defaultValue={item.client}>
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
