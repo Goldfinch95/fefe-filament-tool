@@ -107,11 +107,11 @@ export const schema = z.object({
   status: z.string(),
   client: z.string(),
   date: z.string(),
-  number: z.string(),
-  amount: z.string(),
+  number: z.number(),
+  amount: z.number(),
   observations: z.string(),
   seller: z.string(),
-})
+});
 
 {/*type: z.string(),
   target: z.string(),
