@@ -1,3 +1,5 @@
+/* COMPONENTE: Dialogo que aparece al hacer click en una tarjeta de color */
+
 import { DialogContent, DialogTitle, DialogClose } from "@/common/components/ui/dialog";
 import { Input } from "@/common/components/ui/input";
 import { Button } from "@/common/components/ui/button";
@@ -9,10 +11,13 @@ interface Props {
   onAccept: () => void;
 }
 
-const  ColorDialog = ({ name, inputValue, setInputValue, onAccept }: Props) => {
+const ColorDialog = ({ name, inputValue, setInputValue, onAccept }: Props) => {
   return (
     <DialogContent className="max-w-sm bg-zinc-900 text-white">
+        {/* titulo */}
       <DialogTitle className="text-xl font-bold mb-4">{name}</DialogTitle>
+
+      {/* Input numérico para ingresar la cantidad a restar */}
       <Input
         type="number"
         placeholder="Cantidad a restar"
@@ -20,6 +25,8 @@ const  ColorDialog = ({ name, inputValue, setInputValue, onAccept }: Props) => {
         onChange={(e) => setInputValue(e.target.value)}
         className="mb-4 bg-zinc-800 text-white placeholder-gray-400"
       />
+
+      {/* Al hacer click cierra el Dialog (DialogClose) y ejecuta onAccept */}
       <DialogClose asChild>
         <Button
           onClick={onAccept}
@@ -31,7 +38,6 @@ const  ColorDialog = ({ name, inputValue, setInputValue, onAccept }: Props) => {
       </DialogClose>
     </DialogContent>
   );
-}
-
+};
 
 export default ColorDialog;

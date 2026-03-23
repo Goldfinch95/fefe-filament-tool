@@ -1,4 +1,7 @@
-import { ReactNode } from 'react';
+/* COMPONENTE: Botón circular que aparece en las esquinas de cada ColorCard */
+
+import { ReactNode } from "react";
+
 
 interface Props {
   icon: ReactNode;
@@ -10,13 +13,13 @@ const AlertButton = ({ icon, onClick }: Props) => {
     <button
       className="size-7 sm:size-12 bg-none bg-slate-600 sm:bg-slate-600 hover:bg-black/60 text-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-200 transform hover:scale-110"
       onClick={(e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // evita propagar el click al trigger del Dialog
         onClick();
       }}
     >
       {icon}
     </button>
   );
-}
+};
 
 export default AlertButton;

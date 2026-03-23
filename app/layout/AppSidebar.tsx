@@ -23,7 +23,7 @@ import { Boxes, List, Paintbrush, Scale, } from "lucide-react";
 const items = [
   {
     title: "Colores",
-    url: "/",
+    url: "/colors",
     icon: Paintbrush,
   },
   {
