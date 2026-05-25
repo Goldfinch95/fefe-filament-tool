@@ -20,7 +20,7 @@ const AlertButton = ({ icon, onClick, btnBg, btnBorder }: Props) => {
         onClick();
       }}
     >
-      {icon}
+      {icon}        
     </button>
   );
 };

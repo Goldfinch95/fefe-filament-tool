@@ -24,25 +24,36 @@ const AlertRevert = ({
 }: AlertRevertProps) => {
   return (
     <AlertDialog open={open} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent className="bg-zinc-900 text-white sm:h-1/6">
-      {/* titulo de confirmacion */}
-        <AlertDialogTitle className={`text-4xl text-center font-poppins`}>
-          ¿Te confundiste?
-        </AlertDialogTitle>
-        <div className="flex gap-2">
-            {/* boton de cancelar, cierra el dialogo */}
-          <AlertDialogCancel
-            className={`w-1/2 text-lg text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 font-poppins disabled:bg-gray-400 disabled:cursor-not-allowed`}
-          >
-            No
-          </AlertDialogCancel>
-          {/* boton de confirmar */}
-          <AlertDialogAction
-            onClick={() => {
-              // Verificamos que haya un índice seleccionado antes de llamar al helper
-              if (alertSelectedIndex === null) return;
+      <AlertDialogContent className="w-[620px] min-h-[320px] !p-0 overflow-hidden border-0 bg-zinc-900">
 
-              // El componente llama al helper y le pasa todo lo que necesita
+        {/* Header centrado */}
+        <div className="px-7 pt-6 pb-5 flex flex-col items-center text-center">
+          <AlertDialogTitle className="text-white text-4xl font-medium font-poppins mb-1">
+            ¿Revertir al valor anterior?
+          </AlertDialogTitle>
+          <p className="text-white/40 pt-6 text-lg font-poppins leading-relaxed">
+            Se restaurará el número previo a la última resta.
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-white/[0.06] mx-7" />
+
+        {/* Botones */}
+        <div className="px-7  flex gap-3">
+          <AlertDialogCancel
+            className="flex-1 h-14 rounded-[10px] bg-white/[0.06] border-white/[0.10]
+              text-white text-base font-medium font-poppins
+              hover:bg-white/[0.10] transition-colors"
+          >
+            Cancelar
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className="flex-1 h-14 rounded-[10px] bg-red-600 hover:bg-red-500
+              text-white text-base font-medium font-poppins
+              transition-colors border-0"
+            onClick={() => {
+              if (alertSelectedIndex === null) return;
               handleRevert(
                 alertSelectedIndex,
                 colors,
@@ -54,9 +65,10 @@ const AlertRevert = ({
               );
             }}
           >
-            Sí
+            Confirmar
           </AlertDialogAction>
         </div>
+
       </AlertDialogContent>
     </AlertDialog>
   );
