@@ -11,8 +11,8 @@ import {
 } from "@/common/components/ui/alert-dialog";
 import { AlertProps } from "../types/alert.types";
 import { handleReset } from "../helpers/reset.colors";
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
 const AlertReset = ({
   open,
@@ -22,30 +22,40 @@ const AlertReset = ({
   setColors,
   setAlertSelectedIndex,
 }: AlertProps) => {
-
-  
-
   return (
     <AlertDialog open={open} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent className="bg-zinc-900 text-white sm:h-1/6">
-      {/* Titulo de confirmacion */}
-        <AlertDialogTitle className={`text-4xl text-center font-poppins`}>
-          Chequeado?
-        </AlertDialogTitle>
-        <div className="flex gap-2">
-            {/* boton de cancelar y cierre de dialogo */}
+      <AlertDialogContent className="w-[420px] p-0 overflow-hidden border-0 bg-zinc-900">
+
+        {/* Header centrado con icono */}
+        <div className="px-7 pt-7 pb-5 flex flex-col items-center text-center">
+          
+          <AlertDialogTitle className="text-white text-2xl font-medium font-poppins mb-1">
+            ¿Resetear a 1000?
+          </AlertDialogTitle>
+          <p className="text-white/40 text-lg font-poppins leading-relaxed">
+            El valor actual se perderá.<br />
+            Esta acción no se puede deshacer.
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-white/[0.06] mx-7" />
+
+        {/* Botones */}
+        <div className="px-7 pt-6 pb-7 flex gap-3">
           <AlertDialogCancel
-            className={`w-1/2 text-lg text-center rounded-md border border-gray-300 hover:bg-gray-200 text-black font-poppins`}
+            className="flex-1 h-14 rounded-[10px] bg-white/[0.06] border-white/[0.10]
+              text-white text-xl font-medium font-poppins
+              hover:bg-white/[0.10] transition-colors"
           >
-            No
+            Cancelar
           </AlertDialogCancel>
-          {/* boton de confirmacion */}
           <AlertDialogAction
-            className={`w-1/2 text-lg text-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 font-poppins`}
+            className="flex-1 h-14 rounded-[10px] bg-red-600 hover:bg-red-500
+              text-white text-xl font-medium font-poppins
+              transition-colors border-0"
             onClick={() => {
-              // Verificamos que haya un índice de color seleccionado antes de llamar al helper
               if (alertSelectedIndex === null) return;
-              // El componente  llama al helper le pasa todo lo que necesita
               handleReset(
                 alertSelectedIndex,
                 colors,
@@ -55,9 +65,10 @@ const AlertReset = ({
               );
             }}
           >
-            Sí
+            Sí, resetear
           </AlertDialogAction>
         </div>
+
       </AlertDialogContent>
     </AlertDialog>
   );

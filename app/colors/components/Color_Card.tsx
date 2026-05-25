@@ -10,6 +10,7 @@ import { faBackwardStep, faArrowsRotate } from "@fortawesome/free-solid-svg-icon
 import { getTextColor } from "../helpers/text.colors";
 import { textLight } from "../helpers/text_light.colors";
 import { Color } from "../types/colors.types";
+import ColorDialog from "./Color_Dialog";
 
 interface Props {
   color: Color;
@@ -82,39 +83,15 @@ const ColorCard = ({
         </li>
       </DialogTrigger>
 
-      {/* Dialog para restar cantidad */}
-      <DialogContent className="w-fill bg-zinc-900 text-white">
-        <DialogTitle className="text-3xl sm:text-4xl mt-1 text-center font-poppins">
-          {color.name}
-        </DialogTitle>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!isNaN(Number(inputValue)) && Number(inputValue) > 0) {
-              onAccept();
-              onDeselect();
-            }
-          }}
-          className="space-y-4"
-        >
-          <Input
-            type="number"
-            placeholder="Cantidad a restar"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="h-12 p-4 bg-zinc-800 text-white placeholder-gray-400
-              [&::-webkit-inner-spin-button]:appearance-none
-              [&::-webkit-outer-spin-button]:appearance-none font-poppins"
-          />
-          <Button
-            type="submit"
-            className="text-base sm:text-2xl w-full h-12 my-2 bg-blue-600 hover:bg-blue-700 text-white font-poppins"
-            disabled={isNaN(Number(inputValue)) || Number(inputValue) <= 0}
-          >
-            Aceptar
-          </Button>
-        </form>
-      </DialogContent>
+      {/* Dialog rediseñado */}
+      <ColorDialog
+        name={color.name}
+        number={color.number}
+        color={color.color}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        onAccept={onAccept}
+      />
     </Dialog>
   );
 };

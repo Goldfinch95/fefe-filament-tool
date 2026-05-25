@@ -6,36 +6,59 @@ import { Button } from "@/common/components/ui/button";
 
 interface Props {
   name: string;
+  number: number;
+  color: string;
   inputValue: string;
   setInputValue: (val: string) => void;
   onAccept: () => void;
 }
 
-const ColorDialog = ({ name, inputValue, setInputValue, onAccept }: Props) => {
+const ColorDialog = ({ name, number, color, inputValue, setInputValue, onAccept }: Props) => {
   return (
-    <DialogContent className="max-w-sm bg-zinc-900 text-white">
-        {/* titulo */}
-      <DialogTitle className="text-xl font-bold mb-4">{name}</DialogTitle>
+    <DialogContent className="w-[620px] min-h-[320px] p-0 overflow-hidden border-0 bg-zinc-900">
+      {/* Header */}
+      <div className="flex items-center gap-3 px-7 pt-7 pb-5">
+        <span
+          className="size-4 rounded-full flex-shrink-0"
+          style={{ backgroundColor: color }}
+        />
+        <DialogTitle className="text-white text-2xl font-medium font-poppins tracking-tight">
+          {name}
+        </DialogTitle>
+        <span className="ml-auto text-xl text-white/40 font-poppins">
+          {number} unid.
+        </span>
+      </div>
 
-      {/* Input numérico para ingresar la cantidad a restar */}
-      <Input
-        type="number"
-        placeholder="Cantidad a restar"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        className="mb-4 bg-zinc-800 text-white placeholder-gray-400"
-      />
+      {/* Divider */}
+      <div className="h-px bg-white/[0.06] mx-7" />
 
-      {/* Al hacer click cierra el Dialog (DialogClose) y ejecuta onAccept */}
-      <DialogClose asChild>
-        <Button
-          onClick={onAccept}
-          disabled={isNaN(Number(inputValue)) || Number(inputValue) <= 0}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-        >
-          Aceptar
-        </Button>
-      </DialogClose>
+      {/* Body */}
+      <div className="px-7 pt-6 pb-7 flex flex-col gap-4">
+        <Input
+          type="number"
+          placeholder="Cantidad a restar"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          className="h-14 bg-white/[0.06] border-white/[0.10] text-white placeholder-white/30
+            rounded-[10px] px-4 !text-lg font-poppins
+            [&::-webkit-inner-spin-button]:appearance-none
+            [&::-webkit-outer-spin-button]:appearance-none
+            focus-visible:border-white/30 focus-visible:ring-0"
+        />
+
+        <DialogClose asChild>
+          <Button
+            onClick={onAccept}
+            disabled={isNaN(Number(inputValue)) || Number(inputValue) <= 0}
+            className="w-full h-14 rounded-[10px] bg-green-600 hover:bg-green-500
+              text-white text-2xl font-medium font-poppins
+              disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            Aceptar
+          </Button>
+        </DialogClose>
+      </div>
     </DialogContent>
   );
 };
