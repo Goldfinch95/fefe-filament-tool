@@ -129,13 +129,7 @@
 
 @layer utilities {
   .background_img {
-  background-image: url('/fefe.webp');
-    background-size: contain; /* o cover si querés que llene */
-    background-position: center;
-    background-repeat: no-repeat;
-
-    
-  
+  background-color: #0f0f0f;
 }
 
 .grid-costum{

@@ -6,14 +6,17 @@ import { ReactNode } from "react";
 interface Props {
   icon: ReactNode;
   onClick: () => void;
+  btnBg: string;    // fondo dinámico según el color de la tarjeta
+  btnBorder: string; // borde dinámico según el color de la tarjeta
 }
 
-const AlertButton = ({ icon, onClick }: Props) => {
+const AlertButton = ({ icon, onClick, btnBg, btnBorder }: Props) => {
   return (
     <button
-      className="size-7 sm:size-12 bg-none bg-slate-600 sm:bg-slate-600 hover:bg-black/60 text-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-200 transform hover:scale-110"
+      className="size-7 rounded-lg flex items-center justify-center transition-transform duration-200 hover:scale-110 border"
+      style={{ background: btnBg, borderColor: btnBorder }}
       onClick={(e) => {
-        e.stopPropagation(); // evita propagar el click al trigger del Dialog
+        e.stopPropagation();
         onClick();
       }}
     >
